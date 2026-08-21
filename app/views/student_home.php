@@ -170,7 +170,11 @@
 <body>
 
     <nav>
-        <a href="<?= site_url('student'); ?>" class="active">Home</a>
+                <a href="/student" class="active">Home</a>
+
+            <a href="/student/profile">
+                Student Profile
+            </a>
 
         <a href="<?= site_url('student/profile'); ?>">
             Student Profile
