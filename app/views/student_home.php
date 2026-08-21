@@ -176,9 +176,6 @@
                 Student Profile
             </a>
 
-        <a href="<?= site_url('student/profile'); ?>">
-            Student Profile
-        </a>
     </nav>
 
     <main class="home-card">
