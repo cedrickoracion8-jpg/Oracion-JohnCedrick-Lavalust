@@ -112,9 +112,10 @@
         </p>
 
         <div class="nav">
-            <a href="<?=site_url('student');?>">Home</a>
-            <a href="<?=site_url('student/profile');?>">Profile</a>
+            <a href="/student">Home</a>
+            <a href="/student/profile">Profile</a>
         </div>
+
 
         <p class="quote">
             🌱 "Take only memories, leave only footprints." 🌱
