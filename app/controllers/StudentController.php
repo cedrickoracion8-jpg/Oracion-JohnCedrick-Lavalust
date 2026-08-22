@@ -11,13 +11,14 @@ class StudentController extends Controller
 
     public function profile()
     {
+        $this->call->helper('url');
         $student = [
             'student_id' => 'MCC2024-00106',
-            'name' => 'John Cedrick M. Oracion',
+            'name' => 'John Cedrick M.Oracion',
             'course' => 'BS Information Technology',
             'year' => '3rd Year',
             'section' => 'F3',
-            'email' => 'oracion.johncedrick@minsu.edu.ph',
+            'email' => 'john.cedrick.oracion@minsu.edu.ph',
         ];
 
         $this->call->view('student_profile', $student);
