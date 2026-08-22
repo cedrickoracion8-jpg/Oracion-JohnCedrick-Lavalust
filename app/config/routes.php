@@ -1,7 +1,5 @@
 
-$router->get('/', 'StudentController::index', ['middleware' => 'StudentMiddleware']);
-$router->get('/student', 'StudentController::index', [ 'middleware' => 'StudentMiddleware']);
-$router->get('/student/profile', 'StudentController::profile', ['middleware' => 'StudentMiddleware']);<?php
+<?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * ------------------------------------------------------------------
