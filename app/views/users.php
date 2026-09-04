@@ -4,6 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    <style>
+        :root {
+            --forest-950: #06231b;
+            --forest-900: #0a3327;
+            --forest-800: #0f4a37;
+            --forest-700: #166647;
+            --moss-500: #2f9463;
+            --moss-400: #4bb37e;
+            --mint-300: #86d9ab;
+            --mint-200: #bdeed0;
+            --paper: #f4faf6;
+            --ink: #10231a;
+            --ink-soft: #4d6b5c;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 15% 10%, rgba(134, 217, 171, 0.18), transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(47, 148, 99, 0.25), transparent 50%),
+                linear-gradient(160deg, var(--forest-950) 0%, var(--forest-800) 45%, var(--moss-500) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 920px;
+            background: var(--paper);
+            border-radius: 18px;
+            box-shadow:
+                0 30px 60px -20px rgba(6, 35, 27, 0.55),
+                0 0 0 1px rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .container h2 {
+            margin: 0;
+            padding: 30px 36px 24px;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            color: #ffffff;
+            background: linear-gradient(120deg, var(--forest-900), var(--forest-700) 60%, var(--moss-500));
+            border-bottom: 3px solid var(--mint-300);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 12.5px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            color: var(--forest-900);
+            padding: 14px 20px;
+            background: var(--mint-200);
+            border-bottom: 2px solid var(--moss-400);
+        }
+
+        thead th:first-child { padding-left: 36px; }
+        thead th:last-child { padding-right: 36px; }
+
+        tbody td {
+            padding: 14px 20px;
+            font-size: 14.5px;
+            color: var(--ink);
+            border-bottom: 1px solid #dcefe2;
+        }
+
+        tbody td:first-child { padding-left: 36px; color: var(--ink-soft); }
+        tbody td:last-child { padding-right: 36px; }
+
+        tbody tr:nth-child(even) { background: #eef8f1; }
+
+        tbody tr:hover {
+            background: linear-gradient(90deg, rgba(75, 179, 126, 0.14), rgba(134, 217, 171, 0.08));
+        }
+
+        tbody tr:last-child td { border-bottom: none; }
+
+        td.empty {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--ink-soft);
+            font-style: italic;
+            background: #fff;
+        }
+
+        @media (max-width: 640px) {
+            .container h2 { padding: 24px 20px 20px; font-size: 19px; }
+            thead th, tbody td { padding: 12px 14px; font-size: 13px; }
+            thead th:first-child, tbody td:first-child { padding-left: 20px; }
+            thead th:last-child, tbody td:last-child { padding-right: 20px; }
+        }
+    </style>
 </head>
 <body>
 
