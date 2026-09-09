@@ -586,8 +586,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <a href="https://github.com/ronmarasigan/LavaLust" target="_blank" class="btn btn-ghost">
         View on GitHub
     </a>
-    <a href="/users" class="btn btn-primary">
-        View User Directory
+    <a href="/login" class="btn btn-primary">
+        Go to Login
     </a>
 </div>
 
