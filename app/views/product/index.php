@@ -1,4 +1,4 @@
-<?php defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed'); ?>
+<?php defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed'); $products = is_array($products ?? null) ? $products : []; ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,8 +21,8 @@
     <div class="toolbar"><span class="user">Signed in as <?= htmlspecialchars($_SESSION['username'] ?? 'user'); ?></span><form class="logout" method="post" action="<?= site_url('logout'); ?>"><button type="submit">Sign out</button></form></div>
     <?php if (!empty($message)): ?><div class="notice" role="status">Product <?= htmlspecialchars($message); ?>.</div><?php endif; ?>
     <div class="table-wrap"><table><thead><tr><th>Name</th><th>Description</th><th>Price</th><th>Quantity</th><th>Created</th><th>Actions</th></tr></thead><tbody>
-    <?php if (!empty($products)): foreach ($products as $product): ?>
-        <tr><td><strong><?= htmlspecialchars($product['product_name']); ?></strong></td><td class="description"><?= htmlspecialchars($product['description'] ?? ''); ?></td><td><?= number_format((float) $product['price'], 2); ?></td><td><?= (int) $product['quantity']; ?></td><td><?= htmlspecialchars($product['created_at'] ?? ''); ?></td><td class="actions"><a href="<?= site_url('products/edit/' . (int) $product['id']); ?>">Edit</a><form class="delete" method="post" action="<?= site_url('products/delete/' . (int) $product['id']); ?>" onsubmit="return confirm('Delete this product?');"><button type="submit">Delete</button></form></td></tr>
+    <?php if (!empty($products)): foreach ($products as $product): $product = is_array($product) ? $product : []; ?>
+        <tr><td><strong><?= htmlspecialchars($product['product_name'] ?? ''); ?></strong></td><td class="description"><?= htmlspecialchars($product['description'] ?? ''); ?></td><td><?= number_format((float) ($product['price'] ?? 0), 2); ?></td><td><?= (int) ($product['quantity'] ?? 0); ?></td><td><?= htmlspecialchars($product['created_at'] ?? ''); ?></td><td class="actions"><a href="<?= site_url('products/edit/' . (int) ($product['id'] ?? 0)); ?>">Edit</a><form class="delete" method="post" action="<?= site_url('products/delete/' . (int) ($product['id'] ?? 0)); ?>" onsubmit="return confirm('Delete this product?');"><button type="submit">Delete</button></form></td></tr>
     <?php endforeach; else: ?><tr><td class="empty" colspan="6">No products yet. Add your first product to get started.</td></tr><?php endif; ?>
     </tbody></table></div>
 </main>

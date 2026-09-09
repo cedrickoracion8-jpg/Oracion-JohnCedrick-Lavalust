@@ -1,4 +1,4 @@
-<?php defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed'); $editing = !empty($product['id']); ?>
+<?php defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed'); $product = is_array($product ?? null) ? $product : []; $editing = !empty($product['id']); ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,7 +13,7 @@
 <body>
 <main><a class="back" href="<?= site_url('products'); ?>">&larr; Back to products</a><h1><?= $editing ? 'Edit product' : 'Add product'; ?></h1>
 <?php if (!empty($error)): ?><div class="error" role="alert"><?= htmlspecialchars($error); ?></div><?php endif; ?>
-<form method="post" action="<?= site_url($editing ? 'products/edit/' . (int) $product['id'] : 'products'); ?>">
+<form method="post" action="<?= site_url($editing ? 'products/edit/' . (int) ($product['id'] ?? 0) : 'products'); ?>">
     <label for="product_name">Product name</label><input id="product_name" name="product_name" maxlength="100" required value="<?= htmlspecialchars($product['product_name'] ?? ''); ?>">
     <label for="description">Description</label><textarea id="description" name="description"><?= htmlspecialchars($product['description'] ?? ''); ?></textarea>
     <div class="grid"><div><label for="price">Price</label><input id="price" name="price" type="number" min="0" step="0.01" required value="<?= htmlspecialchars($product['price'] ?? ''); ?>"></div><div><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="0" step="1" required value="<?= htmlspecialchars($product['quantity'] ?? ''); ?>"></div></div>
