@@ -1,8 +1,9 @@
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
+$product = is_array($product ?? null) ? $product : [];
 $is_edit = ($mode === 'edit');
-$form_action = $is_edit ? base_url('products/edit/' . $product['id']) : base_url('products/create');
+$form_action = $is_edit ? base_url('products/edit/' . ($product['id'] ?? 0)) : base_url('products/create');
 ?>
 <!DOCTYPE html>
 <html lang="en">
