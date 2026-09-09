@@ -339,11 +339,26 @@ if ( ! function_exists('database_config'))
 		{
 			require_once APP_DIR . 'config/database.php';
 
-			if ( isset($database) && is_array($database) )
+			if ( is_array($database ?? null) )
 			{
 				foreach( $database as $key => $val )
 				{
 					$database[$key] = $val;
+				}
+
+				if ( !isset($database['main']) || !is_array($database['main']) )
+				{
+					$database['main'] = [
+						'driver'   => getenv('DB_CONNECTION') ?: 'mysql',
+						'hostname' => getenv('DB_HOST') ?: '127.0.0.1',
+						'port'     => getenv('DB_PORT') ?: '3306',
+						'username' => getenv('DB_USERNAME') ?: 'root',
+						'password' => getenv('DB_PASSWORD') ?: '',
+						'database' => getenv('DB_NAME') ?: 'lavalust',
+						'charset'  => getenv('DB_CHARSET') ?: 'utf8mb4',
+						'dbprefix' => getenv('DB_PREFIX') ?: '',
+						'path'     => getenv('DB_PATH') ?: ''
+					];
 				}
 
 				return $database;

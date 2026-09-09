@@ -201,8 +201,34 @@ class Database {
     {
         $resolved_config = function_exists('database_config') ? database_config() : null;
 
-        if (!is_array($resolved_config) || !isset($resolved_config['main']) || !is_array($resolved_config['main'])) {
-            throw new PDOException('No active configuration for this database.');
+        if (!is_array($resolved_config)) {
+            $resolved_config = [
+                'main' => [
+                    'driver'   => getenv('DB_CONNECTION') ?: 'mysql',
+                    'hostname' => getenv('DB_HOST') ?: '127.0.0.1',
+                    'port'     => getenv('DB_PORT') ?: '3306',
+                    'username' => getenv('DB_USERNAME') ?: 'root',
+                    'password' => getenv('DB_PASSWORD') ?: '',
+                    'database' => getenv('DB_NAME') ?: 'lavalust',
+                    'charset'  => getenv('DB_CHARSET') ?: 'utf8mb4',
+                    'dbprefix' => getenv('DB_PREFIX') ?: '',
+                    'path'     => getenv('DB_PATH') ?: ''
+                ]
+            ];
+        }
+
+        if (!isset($resolved_config['main']) || !is_array($resolved_config['main'])) {
+            $resolved_config['main'] = [
+                'driver'   => getenv('DB_CONNECTION') ?: 'mysql',
+                'hostname' => getenv('DB_HOST') ?: '127.0.0.1',
+                'port'     => getenv('DB_PORT') ?: '3306',
+                'username' => getenv('DB_USERNAME') ?: 'root',
+                'password' => getenv('DB_PASSWORD') ?: '',
+                'database' => getenv('DB_NAME') ?: 'lavalust',
+                'charset'  => getenv('DB_CHARSET') ?: 'utf8mb4',
+                'dbprefix' => getenv('DB_PREFIX') ?: '',
+                'path'     => getenv('DB_PATH') ?: ''
+            ];
         }
 
         if (is_null($dbname)) {
@@ -211,7 +237,7 @@ class Database {
             if (isset($resolved_config[$dbname]) && is_array($resolved_config[$dbname])) {
                 $database_config = $resolved_config[$dbname];
             } else {
-                throw new PDOException('No active configuration for this database.');
+                $database_config = $resolved_config['main'];
             }
         }
         $this->db_prefix = isset($database_config['dbprefix']) ? $database_config['dbprefix'] : '';
