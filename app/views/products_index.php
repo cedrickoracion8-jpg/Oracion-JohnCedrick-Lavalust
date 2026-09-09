@@ -13,8 +13,8 @@ $is_admin = (($_SESSION['role'] ?? null) === 'admin');
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f7fb 0%, #e8edf5 100%);
-            color: #1f2937;
+            background: #000; /* Black background */
+            color: #ecfdf5;
             min-height: 100vh;
             padding: 2.5rem 1.5rem;
         }
@@ -27,7 +27,7 @@ $is_admin = (($_SESSION['role'] ?? null) === 'admin');
             margin-bottom: 1.5rem;
             flex-wrap: wrap;
         }
-        h1 { font-size: 1.6rem; }
+        h1 { font-size: 1.6rem; color: #d1fae5; }
         .actions { display: flex; gap: .6rem; align-items: center; }
         .btn {
             display: inline-block;
@@ -38,33 +38,46 @@ $is_admin = (($_SESSION['role'] ?? null) === 'admin');
             text-decoration: none;
             border: none;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
-        .btn-primary { background: #2563eb; color: #fff; }
-        .btn-primary:hover { background: #1d4ed8; }
-        .btn-muted { background: #e5e7eb; color: #1f2937; }
-        .btn-muted:hover { background: #d1d5db; }
+        .btn-primary {
+            background: linear-gradient(90deg, #047857, #34d399);
+            color: #fff;
+        }
+        .btn-primary:hover { background: linear-gradient(90deg, #065f46, #10b981); }
+        .btn-muted { background: #022c22; color: #d1fae5; border: 1px solid #065f46; }
+        .btn-muted:hover { background: #065f46; }
         .btn-danger { background: #dc2626; color: #fff; }
         .btn-danger:hover { background: #b91c1c; }
         .btn-sm { padding: .4rem .75rem; font-size: .8rem; }
-        .msg { padding: .7rem .9rem; border-radius: 8px; font-size: .85rem; margin-bottom: 1.25rem; }
+        .msg {
+            padding: .7rem .9rem;
+            border-radius: 8px;
+            font-size: .85rem;
+            margin-bottom: 1.25rem;
+        }
         .msg.success { background: #dcfce7; color: #166534; }
         .msg.error { background: #fee2e2; color: #991b1b; }
         .panel {
-            background: #fff;
+            background: linear-gradient(135deg, #064e3b, #10b981);
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
             overflow: hidden;
         }
-        table { width: 100%; border-collapse: collapse; }
+        table { width: 100%; border-collapse: collapse; color: #ecfdf5; }
         th, td { padding: .85rem 1.1rem; text-align: left; font-size: .9rem; }
-        th { background: #2563eb; color: #fff; font-weight: 600; }
-        tbody tr:nth-child(even) { background: #f8fafc; }
-        tbody tr:hover { background: #eef2ff; }
-        td { border-bottom: 1px solid #f1f5f9; }
-        td.desc { max-width: 260px; color: #4b5563; }
+        th {
+            background: #065f46;
+            color: #d1fae5;
+            font-weight: 600;
+        }
+        tbody tr:nth-child(even) { background: rgba(2,44,34,0.6); }
+        tbody tr:hover { background: rgba(52,211,153,0.2); }
+        td { border-bottom: 1px solid #065f46; }
+        td.desc { max-width: 260px; color: #a7f3d0; }
         td.numeric { text-align: right; white-space: nowrap; }
         .row-actions { display: flex; gap: .5rem; }
-        .empty { padding: 2rem; text-align: center; color: #6b7280; }
+        .empty { padding: 2rem; text-align: center; color: #6ee7b7; }
         form.inline { display: inline; }
     </style>
 </head>
@@ -73,10 +86,10 @@ $is_admin = (($_SESSION['role'] ?? null) === 'admin');
     <div class="topbar">
         <h1>Products</h1>
         <div class="actions">
-            <span style="font-size:.85rem;color:#6b7280;">
+            <span style="font-size:.85rem;color:#6ee7b7;">
                 Signed in as <strong><?= htmlspecialchars($_SESSION['username'] ?? ''); ?></strong>
                 <?php if (!$is_admin): ?>
-                    <span style="background:#e5e7eb;color:#4b5563;padding:.15rem .5rem;border-radius:6px;font-size:.75rem;margin-left:.4rem;">view only</span>
+                    <span style="background:#022c22;color:#a7f3d0;padding:.15rem .5rem;border-radius:6px;font-size:.75rem;margin-left:.4rem;">view only</span>
                 <?php endif; ?>
             </span>
             <?php if ($is_admin): ?>
