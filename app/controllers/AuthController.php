@@ -3,6 +3,30 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
 class AuthController extends Controller
 {
+    private function ensure_users_table()
+    {
+        $this->call->database();
+
+        $sql = "
+            CREATE TABLE IF NOT EXISTS `users` (
+                `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                `username` VARCHAR(100) NOT NULL,
+                `email` VARCHAR(255) NOT NULL,
+                `password` VARCHAR(255) NOT NULL,
+                `role` ENUM('admin','user') NOT NULL DEFAULT 'user',
+                `is_active` TINYINT(1) UNSIGNED NOT NULL DEFAULT 1,
+                `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `updated_at` DATETIME NULL DEFAULT NULL,
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `username_unique` (`username`),
+                KEY `email_idx` (`email`),
+                KEY `role_idx` (`role`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+        ";
+
+        lava_instance()->db->raw($sql);
+    }
+
     public function before_action()
     {
         if (session_status() === PHP_SESSION_NONE) {
@@ -43,7 +67,7 @@ class AuthController extends Controller
             return;
         }
 
-        $this->call->database();
+        $this->ensure_users_table();
         $this->call->model('UsersModel');
 
         $user = $this->UsersModel->find_by('username', $username);
@@ -125,7 +149,7 @@ class AuthController extends Controller
             return;
         }
 
-        $this->call->database();
+        $this->ensure_users_table();
         $this->call->model('UsersModel');
 
         if ($this->UsersModel->find_by('username', $username)) {
