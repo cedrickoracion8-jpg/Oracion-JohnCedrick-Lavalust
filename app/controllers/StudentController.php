@@ -14,7 +14,7 @@ class StudentController extends Controller
         $this->call->helper('url');
         $student = [
             'student_id' => 'MCC2024-00106',
-            'name' => 'John  Cedrick M.Oracion',
+            'name' => 'JohnCedrick M.Oracion',
             'course' => 'BS Information Technology',
             'year' => '3rd Year',
             'section' => 'F3',
