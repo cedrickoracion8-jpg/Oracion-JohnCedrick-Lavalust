@@ -339,7 +339,7 @@ if ( ! function_exists('database_config'))
 		{
 			require_once APP_DIR . 'config/database.php';
 
-			if ( isset($database)  OR is_array($database) )
+			if ( isset($database) && is_array($database) )
 			{
 				foreach( $database as $key => $val )
 				{
